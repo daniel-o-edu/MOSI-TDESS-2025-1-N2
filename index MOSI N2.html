@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calendário MOSI N2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Legend styles */
+        .legend {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            user-select: none;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        /* Colors for blocks */
+        .block1 { background-color: #ffcccc; } /* vermelho claro */
+        .block2 { background-color: #cce5ff; } /* azul claro */
+        .block3 { background-color: #d4edda; } /* verde claro */
+        .block4 { background-color: #fff3cd; } /* amarelo claro */
+        .block5 { background-color: #e2d6f9; } /* roxo claro */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #007acc;
+            color: white;
+        }
+        tr:nth-child(even) {
+            /* no background to keep block color visible */
+        }
+        tr:hover {
+            background-color: #d0e7ff !important;
+            cursor: pointer;
+        }
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .popup-content h2 {
+            margin-top: 0;
+            color: #007acc;
+        }
+        .popup-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #999;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .popup-close:hover {
+            color: #007acc;
+        }
+        @media (max-width: 600px) {
+            th, td {
+                padding: 10px 8px;
+            }
+            .legend {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendário MOSI N2 - Aulas e Descrições</h1>
+
+    <div class="legend" aria-label="Legenda dos blocos">
+        <div class="legend-item"><div class="legend-color block1"></div> Bloco 1 – Levantamento de Requisitos</div>
+        <div class="legend-item"><div class="legend-color block2"></div> Bloco 2 – Modelagem de Sistemas</div>
+        <div class="legend-item"><div class="legend-color block3"></div> Bloco 3 – Definição de Requisitos e Tecnologias</div>
+        <div class="legend-item"><div class="legend-color block4"></div> Bloco 4 – Prototipagem e Integração</div>
+        <div class="legend-item"><div class="legend-color block5"></div> Bloco 5 – Consolidação e Apresentação Final</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">Aula</th>
+                <th style="width: 15%;">Data</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Bloco 1 -->
+            <tr class="block1" data-title="Aula 1 - Introdução à UC, contextualização do desafio, regras de negócio" data-desc="Entendimento do desafio e objetivos do projeto">
+                <td>Aula 1</td>
+                <td>20/08</td>
+                <td>Introdução à UC, contextualização do desafio, regras de negócio</td>
+            </tr>
+            <tr class="block1" data-title="Aula 2 - Requisitos funcionais e não funcionais" data-desc="Lista inicial de requisitos">
+                <td>Aula 2</td>
+                <td>26/08</td>
+                <td>Requisitos funcionais e não funcionais</td>
+            </tr>
+            <tr class="block1" data-title="Aula 3 - Análise de requisitos + Canvas de Negócio" data-desc="Canvas preenchido">
+                <td>Aula 3</td>
+                <td>27/08</td>
+                <td>Análise de requisitos + Canvas de Negócio</td>
+            </tr>
+            <tr class="block1" data-title="Aula 4 - Organização de dados e ciclo PDCA" data-desc="Estrutura organizada de informações">
+                <td>Aula 4</td>
+                <td>02/09</td>
+                <td>Organização de dados e ciclo PDCA</td>
+            </tr>
+            <tr class="block1" data-title="Aula 5 - Atividade prática – Documento de requisitos" data-desc="Documento de levantamento de requisitos">
+                <td>Aula 5</td>
+                <td>03/09</td>
+                <td>Atividade prática – Documento de requisitos</td>
+            </tr>
+
+            <!-- Bloco 2 -->
+            <tr class="block2" data-title="Aula 6 - Introdução à UML e tipos de modelagem" data-desc="Documento de referência UML">
+                <td>Aula 6</td>
+                <td>09/09</td>
+                <td>Introdução à UML e tipos de modelagem</td>
+            </tr>
+            <tr class="block2" data-title="Aula 7 - Diagramas de casos de uso" data-desc="Diagrama de casos de uso">
+                <td>Aula 7</td>
+                <td>10/09</td>
+                <td>Diagramas de casos de uso</td>
+            </tr>
+            <tr class="block2" data-title="Aula 8 - Diagramas de classes" data-desc="Diagrama de classes">
+                <td>Aula 8</td>
+                <td>16/09</td>
+                <td>Diagramas de classes</td>
+            </tr>
+            <tr class="block2" data-title="Aula 9 - Diagramas de sequência e fluxos" data-desc="Diagramas de sequência/fluxo">
+                <td>Aula 9</td>
+                <td>17/09</td>
+                <td>Diagramas de sequência e fluxos</td>
+            </tr>
+            <tr class="block2" data-title="Aula 10 - Estudo de caso - Modelagem de software" data-desc="Modelagem de um projeto de software">
+                <td>Aula 10</td>
+                <td>23/09</td>
+                <td>Estudo de caso - Modelagem de software</td>
+            </tr>
+            <tr class="block2" data-title="Aula 11 - Revisão 1 + Prova Objetiva" data-desc="Avaliação aplicada">
+                <td>Aula 11</td>
+                <td>24/09</td>
+                <td>Revisão 1 + Prova Objetiva</td>
+            </tr>
+
+            <!-- Bloco 3 -->
+            <tr class="block3" data-title="Aula 12 - Revisão dos requisitos e documentação técnica" data-desc="Documento revisado">
+                <td>Aula 12</td>
+                <td>30/09</td>
+                <td>Revisão dos requisitos e documentação técnica</td>
+            </tr>
+            <tr class="block3" data-title="Aula 13 - Tecnologias baseadas em requisitos não funcionais" data-desc="Mapa de tecnologias propostas">
+                <td>Aula 13</td>
+                <td>01/10</td>
+                <td>Tecnologias baseadas em requisitos não funcionais</td>
+            </tr>
+            <tr class="block3" data-title="Aula 14 - Estudo comparativo de tecnologias" data-desc="Relatório comparativo">
+                <td>Aula 14</td>
+                <td>07/10</td>
+                <td>Estudo comparativo de tecnologias</td>
+            </tr>
+            <tr class="block3" data-title="Aula 15 - Fundamentos de UX aplicados ao projeto" data-desc="Propostas de melhorias de usabilidade">
+                <td>Aula 15</td>
+                <td>08/10</td>
+                <td>Fundamentos de UX aplicados ao projeto</td>
+            </tr>
+            <tr class="block3" data-title="Aula 16 - Atividade Prática" data-desc="Documentação e Apresentação de Projeto UX">
+                <td>Aula 16</td>
+                <td>14/10</td>
+                <td>Atividade Prática</td>
+            </tr>
+
+            <!-- Bloco 4 -->
+            <tr class="block4" data-title="Aula 17 - Prototipagem de interfaces (Figma/Adobe XD)" data-desc="Protótipo inicial">
+                <td>Aula 17</td>
+                <td>15/10</td>
+                <td>Prototipagem de interfaces (Figma/Adobe XD)</td>
+            </tr>
+            <tr class="block4" data-title="Aula 18 - Criação de telas e fluxos de navegação" data-desc="Protótipo navegável básico">
+                <td>Aula 18</td>
+                <td>21/10</td>
+                <td>Criação de telas e fluxos de navegação</td>
+            </tr>
+            <tr class="block4" data-title="Aula 19 - Testes de usabilidade" data-desc="Relatório de feedback">
+                <td>Aula 19</td>
+                <td>22/10</td>
+                <td>Testes de usabilidade</td>
+            </tr>
+            <tr class="block4" data-title="Aula 20 - Integração simulada com sistemas externos (APIs)" data-desc="Protótipo integrado">
+                <td>Aula 20</td>
+                <td>28/10</td>
+                <td>Integração simulada com sistemas externos (APIs)</td>
+            </tr>
+            <tr class="block4" data-title="Aula 21 - Revisão + Prova Objetiva 2" data-desc="Avaliação aplicada">
+                <td>Aula 21</td>
+                <td>29/10</td>
+                <td>Revisão + Prova Objetiva 2</td>
+            </tr>
+
+            <!-- Bloco 5 -->
+            <tr class="block5" data-title="Aula 22 - Planejamento e execução de testes" data-desc="Roteiro de testes aplicado">
+                <td>Aula 22</td>
+                <td>05/11</td>
+                <td>Planejamento e execução de testes</td>
+            </tr>
+            <tr class="block5" data-title="Aula 23 - Correção de falhas identificadas" data-desc="Sistema ajustado">
+                <td>Aula 23</td>
+                <td>12/11</td>
+                <td>Correção de falhas identificadas</td>
+            </tr>
+            <tr class="block5" data-title="Aula 24 - Documentação técnica final" data-desc="Relatório técnico consolidado">
+                <td>Aula 24</td>
+                <td>19/11</td>
+                <td>Documentação técnica final</td>
+            </tr>
+            <tr class="block5" data-title="Aula 25 - Preparação da apresentação final" data-desc="Material de apresentação pronto">
+                <td>Aula 25</td>
+                <td>26/11</td>
+                <td>Preparação da apresentação final</td>
+            </tr>
+            <tr class="block5" data-title="Aula 26 - Apresentação final do projeto" data-desc="Protótipo funcional e documentado">
+                <td>Aula 26</td>
+                <td>03/12</td>
+                <td>Apresentação final do projeto</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupDesc">
+            <button class="popup-close" id="popupClose" aria-label="Fechar popup">&times;</button>
+            <h2 id="popupTitle"></h2>
+            <p id="popupDesc"></p>
+        </div>
+    </div>
+
+    <script>
+        const popup = document.getElementById('popup');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupDesc = document.getElementById('popupDesc');
+        const popupClose = document.getElementById('popupClose');
+
+        // Function to open popup with given title and description
+        function openPopup(title, desc) {
+            popupTitle.textContent = title;
+            popupDesc.textContent = desc;
+            popup.style.display = 'flex';
+            popupClose.focus();
+        }
+
+        // Close popup function
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        // Add click event to each table row
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                const title = row.getAttribute('data-title');
+                const desc = row.getAttribute('data-desc');
+                openPopup(title, desc);
+            });
+            row.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const title = row.getAttribute('data-title');
+                    const desc = row.getAttribute('data-desc');
+                    openPopup(title, desc);
+                }
+            });
+            // Make rows focusable for accessibility
+            row.setAttribute('tabindex', '0');
+        });
+
+        // Close popup on close button click
+        popupClose.addEventListener('click', closePopup);
+
+        // Close popup on clicking outside content
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+
+        // Close popup on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popup.style.display === 'flex') {
+                closePopup();
+            }
+        });
+    </script>
+</body>
+</html>
